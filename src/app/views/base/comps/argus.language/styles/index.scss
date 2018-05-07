@@ -1,0 +1,12 @@
+.language-switcher {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+
+    li {
+        width: 50px;
+        padding: 0 5px;
+        background: forestgreen;
+        border-left: black 1px solid;
+    }
+}

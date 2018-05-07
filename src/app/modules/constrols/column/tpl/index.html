@@ -1,0 +1,5 @@
+<div #columnList>
+    <div *ngFor="let item of columnsList; let i=index">
+        <mat-checkbox [checked]="item.selected" (change)="selectColumn(item, $event, i)">{{ item.template }}</mat-checkbox>
+    </div>
+</div>
