@@ -33,10 +33,12 @@ import { MatCheckboxChange } from '@angular/material';
 
 export class ArgusColumnComponent {
     private columnsList: Array<any> = [];
+    private filterColumnsList: Array<any> = [];
     private data: any;
     private provider: ArgusGridProvider;
     private actualColumn: any = [];
     private columns: ColDef[];
+    private inputString: string;
 
     constructor(private httpService: HttpService,
                 private cdr: ChangeDetectorRef,
@@ -62,6 +64,8 @@ export class ArgusColumnComponent {
             });
 
             this.checkColumn();
+
+            self.filterColumnsList = self.columnsList;
 
             self.cdr.markForCheck();
         });
@@ -90,10 +94,6 @@ export class ArgusColumnComponent {
 
     selectColumn(item: any, $event: MatCheckboxChange, i: number) {
         this.columnsList[i].selected = !item.selected;
-        // console.log(item.selected);
-        // console.log($event);
-        // this.columnsList[i].selected = !item.selected;
-        // this.cdr.detectChanges();
         let self = this;
         let actualColumns = this.gridProvider.gridOptions.columnApi.getAllColumns();
         let newColumns: Array<any>;
@@ -116,57 +116,19 @@ export class ArgusColumnComponent {
         });
 
         this.gridProvider.gridOptions.columnDefs = this.gridProvider.getFrozenColumn(this.actualColumn);
+    }
 
-        // if (!$event.checked) {
-        //     // remove
-        //     // newColumns = this.columns.filter((col) => {
-        //     //     if (item.template !== col.headerName) {
-        //     //         return col;
-        //     //     }
-        //     // });
-        //     newColumns = self.columnsList.filter((colL) => {
-        //         if (colL.selected) {
-        //             return true;
-        //         }
-        //     });
-
-        //     this.actualColumn = this.columns.filter((col) => {
-        //         let flag = false;
-        //         newColumns.forEach((aCol: any) => {
-        //             let name = aCol.template;
-        //             if (col.headerName === name) {
-        //                 flag = true;
-        //             }
-        //         });
-        //         return flag;
-        //     });
-
-        //     this.gridProvider.gridOptions.columnDefs = this.gridProvider.getFrozenColumn(this.actualColumn);
-        // } else {
-        //     // add
-        //     newColumns = self.columnsList.filter((colL) => {
-        //         if (colL.selected) {
-        //             return true;
-        //         }
-        //     });
-
-        //     console.log(newColumns);
-
-        //     this.actualColumn = this.columns.filter((col) => {
-        //         let flag = false;
-        //         newColumns.forEach((aCol: any) => {
-        //             let name = aCol.template;
-        //             if (col.headerName === name) {
-        //                 flag = true;
-        //             }
-        //         });
-        //         return flag;
-        //     });
-
-        //     console.log(this.actualColumn);
-
-        //     this.gridProvider.gridOptions.columnDefs = this.gridProvider.getFrozenColumn(self.actualColumn);
-        // }
+    filterColumns() {
+        let self = this;
+        let columnMap = this.filterColumnsList.filter((col) => {
+            let temp = col.template.toLowerCase();
+            let input = self.inputString.toLowerCase();
+            if (temp.indexOf(input) !== -1) {
+                return true;
+            }
+            // return false;
+        });
+        this.columnsList = columnMap;
     }
 
     getViewGrid(): Observable<any> {

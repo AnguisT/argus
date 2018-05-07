@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from 'ng2-translate';
 
 import { ArgusColumnComponent } from './argus.column.component';
-import { MatCheckboxModule } from '@angular/material';
+import { MatCheckboxModule, MatInputModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,9 @@ import { MatCheckboxModule } from '@angular/material';
     imports: [
         TranslateModule,
         CommonModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatInputModule,
+        FormsModule
     ],
     exports: [
         ArgusColumnComponent,
