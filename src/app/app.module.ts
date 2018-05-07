@@ -19,6 +19,7 @@ import { ArgusStartModule } from './views/start/index';
 import { BaseComponent } from './views/base/base.component';
 import { BaseLanguageComponent } from './views/base/comps/argus.language/argus.language.component';
 import { InMemoryDataService } from './mock-service/in-memory-data.service';
+import { HttpService } from './modules/service/http.service/http.service';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -53,6 +54,7 @@ import { InMemoryDataService } from './mock-service/in-memory-data.service';
         BrowserAnimationsModule
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
+        HttpService
     ],
     exports: [
     ],

@@ -1,13 +1,18 @@
-import { Component, ViewEncapsulation, Input, ViewChild, Inject, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+    Component,
+    ViewEncapsulation,
+    Input,
+    ViewChild,
+    ChangeDetectorRef
+} from '@angular/core';
 import { GridOptions, ColDef } from 'ag-grid';
-import { Observable, Subscription } from 'rxjs';
-import { HttpService } from '../../modules/service/http.service/http.service';
 import { Response } from '@angular/http';
 import { MatDialog } from '@angular/material';
 import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
 import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
 import { ArgusGridProvider } from '../../modules/constrols/grid/provider/argus.grid.provider';
+import { ArgusStartService } from './service/argus.start.service';
+import { ArgusStartProvider } from './provider/argus.start.provider';
 
 @Component({
     selector: 'argus-start',
@@ -17,16 +22,17 @@ import { ArgusGridProvider } from '../../modules/constrols/grid/provider/argus.g
     ],
     encapsulation: ViewEncapsulation.None,
     providers: [
-        HttpService,
+        ArgusStartService,
+        ArgusStartProvider,
         MatDialog,
         ArgusGridProvider
     ]
 })
 
 export class ArgusStartComponent {
-    private data: any = [];
-    private data1: any = [];
-    private views: any = [];
+    public data: any = [];
+    public data1: any = [];
+    public views: any = [];
     @ViewChild('viewSelect') private viewSelect: any;
 
     public columnDefs = <Array<ColDef>>[
@@ -34,7 +40,7 @@ export class ArgusStartComponent {
 
     rowData: any;
 
-    private gridOptions = <GridOptions>{
+    public gridOptions = <GridOptions>{
         enableSorting: true,
         enableFilter: false,
         enableColResize: true,
@@ -45,31 +51,18 @@ export class ArgusStartComponent {
         // }
     };
 
-    constructor(private httpService: HttpService,
-                public dialog: MatDialog,
-                public gridProvider: ArgusGridProvider,
-                public cdr: ChangeDetectorRef) {
+    constructor(private dialog: MatDialog,
+                private gridProvider: ArgusGridProvider,
+                private cdr: ChangeDetectorRef,
+                private argusStartProvider: ArgusStartProvider) {
         this.gridProvider.gridOptions = this.gridOptions;
+        this.argusStartProvider.compContext = this;
+        this.argusStartProvider.gridProvider = this.gridProvider;
     }
 
     ngOnInit() {
         let self = this;
-        this.getUserViews().subscribe((data) => {
-            self.views = data;
-        });
-        this.getViewGrid().subscribe((data) => {
-            let column = self.gridProvider.viewColumnsToGridColumns(data);
-            self.columnDefs = self.gridProvider.getFrozenColumn(column);
-        });
-        this.getDataGrid().subscribe((data) => {
-            this.rowData = data;
-        });
-        this.getSelectData().subscribe((data) => {
-            this.data = data;
-        });
-        this.getMultiSelectData().subscribe((data) => {
-            this.data1 = data;
-        });
+        this.argusStartProvider.init();
     }
 
     ngAfterViewInit() {
@@ -99,12 +92,12 @@ export class ArgusStartComponent {
     onSelect() {
         let self = this;
         let id = this.viewSelect.getSelected();
-        // console.log($event);
-        this.getUserView(id).subscribe((data) => {
-            let column = self.gridProvider.viewColumnsToGridColumns(data.columns);
-            self.columnDefs = self.gridProvider.getFrozenColumn(column);
-            self.gridOptions.api.refreshCells();
-        });
+        this.argusStartProvider.onSelect(id);
+        // this.getUserView(id).subscribe((data) => {
+        //     let column = self.gridProvider.viewColumnsToGridColumns(data.columns);
+        //     self.columnDefs = self.gridProvider.getFrozenColumn(column);
+        //     self.gridOptions.api.refreshCells();
+        // });
     }
 
     gridColumnsChanged() {
@@ -113,29 +106,5 @@ export class ArgusStartComponent {
             allColumnIds.push(columnDef.field);
         });
         this.gridOptions.columnApi.autoSizeColumns(allColumnIds);
-    }
-
-    getDataGrid(): Observable<any> {
-        return this.httpService.getMock('api/grid');
-    }
-
-    getViewGrid(): Observable<any> {
-        return this.httpService.getMock('api/view');
-    }
-
-    getUserViews(): Observable<any> {
-        return this.httpService.getMock('api/userViews');
-    }
-
-    getUserView(id: number): Observable<any> {
-        return this.httpService.getMock(`api/userView/${id}`);
-    }
-
-    getSelectData(): Observable<any> {
-        return this.httpService.getMock('api/data');
-    }
-
-    getMultiSelectData(): Observable<any> {
-        return this.httpService.getMock('api/data1');
     }
 }
