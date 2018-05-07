@@ -11,11 +11,10 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import * as $ from 'jquery';
-import { Observable } from 'rxjs';
-import { HttpService } from '../../service/http.service/http.service';
 import { ArgusGridProvider } from '../grid/provider/argus.grid.provider';
 import { ColDef } from 'ag-grid';
 import { MatCheckboxChange } from '@angular/material';
+import { ArgusColumnService } from './service/argus.column.service';
 
 @Component({
     selector: 'argus-column',
@@ -26,7 +25,7 @@ import { MatCheckboxChange } from '@angular/material';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
-        HttpService,
+        ArgusColumnService
         // {provide: ArgusGridProvider, useValue: ArgusGridProvider}
     ]
 })
@@ -40,9 +39,9 @@ export class ArgusColumnComponent {
     private columns: ColDef[];
     private inputString: string;
 
-    constructor(private httpService: HttpService,
-                private cdr: ChangeDetectorRef,
-                private gridProvider: ArgusGridProvider) {}
+    constructor(private cdr: ChangeDetectorRef,
+                private gridProvider: ArgusGridProvider,
+                private argusColumnService: ArgusColumnService) {}
 
     ngOnInit() {
         this.provider = this.gridProvider;
@@ -51,7 +50,7 @@ export class ArgusColumnComponent {
 
     getColumnGrid() {
         let self = this;
-        this.getViewGrid().subscribe((data) => {
+        this.argusColumnService.getViewGrid().subscribe((data) => {
             self.data = data;
             self.columns = this.gridProvider.viewColumnsToGridColumns(this.data);
 
@@ -126,12 +125,7 @@ export class ArgusColumnComponent {
             if (temp.indexOf(input) !== -1) {
                 return true;
             }
-            // return false;
         });
         this.columnsList = columnMap;
-    }
-
-    getViewGrid(): Observable<any> {
-        return this.httpService.getMock('api/view');
     }
 }
