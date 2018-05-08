@@ -1,5 +1,5 @@
 <div style="display: flex">
-    <argus-control [data]="dataControl"></argus-control>
-    <argus-condition [data]="dataCondition"></argus-condition>
-    <argus-field [data]="dataField"></argus-field>
+    <argus-control (onSelectControl)="onSelect($event)" [data]="dataControl"></argus-control>
+    <argus-condition (onSelectCondition)="onSelectCondition($event)" [data]="dataCondition"></argus-condition>
+    <argus-field (onSelectField)="onSelectField($event)" [data]="dataField"></argus-field>
 </div>

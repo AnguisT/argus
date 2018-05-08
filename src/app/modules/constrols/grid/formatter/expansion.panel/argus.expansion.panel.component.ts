@@ -26,7 +26,6 @@ export class ArgusExpansionPanelFormatterComponent {
 
     // called on init
     agInit(params: any): void {
-        console.log(params);
         this.params = params;
         this.gridProvider = this.injector.get(ArgusGridProvider);
     }

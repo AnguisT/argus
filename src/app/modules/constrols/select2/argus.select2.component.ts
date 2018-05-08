@@ -5,7 +5,8 @@ import {
     ChangeDetectionStrategy,
     ViewChild,
     Output,
-    EventEmitter
+    EventEmitter,
+    ChangeDetectorRef
 } from '@angular/core';
 import * as $ from 'jquery';
 // Loading plugin
@@ -40,19 +41,25 @@ export class ArgusSelect2Component {
 
     @Input('allowClear') private allowClear: boolean = false;
 
-    @Output() onSelect: EventEmitter<any> = new EventEmitter<any>();
+    @Input('firstEmpty') private firstEmpty: boolean = true;
 
-    constructor() {}
+    @Output('onSelect') onSelect: EventEmitter<any> = new EventEmitter<any>();
 
-    ngAfterViewInit() {
+    constructor(private cdr: ChangeDetectorRef) {}
+
+    ngOnInit() {
+        this.init();
+    }
+
+    init() {
         let self = this;
         this.compRef = $(this.compRef.nativeElement);
-        if (this.multi === false) {
+        if (this.multi === false && this.firstEmpty) {
             this.compRef.append($('<option></option>'));
         }
         this.compRef = this.compRef.select2({
             data: self.data,
-            width: '300px',
+            width: self.width,
             placeholder: self.placeholder,
             minimumResultsForSearch: self.minimumResultsForSearch,
             allowClear: self.allowClear
@@ -60,23 +67,26 @@ export class ArgusSelect2Component {
 
         this.compRef.unbind('select2:select');
         this.compRef.on('select2:select', function (e: any) {
-            // console.log(e);
-            // e.selected = self.selected;
-
-            self.onSelect.emit(e);
-
+            self.onSelect.emit(self.getSelected());
         });
-        // let compData = this.compRef.data('select2');
-        // console.log(compData);
-        // this.setSelected();
     }
 
-    public getSelected() {
+    setData(data: any) {
+        this.data = data;
+        this.cdr.detectChanges();
+    }
+
+    reInit() {
+        this.compRef.select2('destroy');
+        this.init();
+    }
+
+    getSelected() {
         return this.compRef.val();
     }
 
-    setSelected() {
-        // debugger;
-        // this.compRef.val(null).trigger('change');
+    setSelectedById(id: number) {
+        this.compRef.val(id).trigger('change');
+        this.onSelect.emit(this.getSelected());
     }
 }
