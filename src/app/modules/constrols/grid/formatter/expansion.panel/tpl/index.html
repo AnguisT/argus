@@ -1,0 +1,20 @@
+<div #expansivePanel>
+    <mat-expansion-panel (opened)="toggleExpansionPanel(true)"
+                        (closed)="toggleExpansionPanel(false)">
+
+        <mat-expansion-panel-header>
+
+            <mat-panel-title>
+                Self aware panel
+            </mat-panel-title>
+
+            <mat-panel-description>
+                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+            </mat-panel-description>
+
+        </mat-expansion-panel-header>
+
+        I'm visible because I am open
+
+    </mat-expansion-panel>
+</div>

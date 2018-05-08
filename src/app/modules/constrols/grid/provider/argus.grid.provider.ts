@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ColDef, GridOptions } from 'ag-grid';
+import {
+    ArgusExpansionPanelFormatterComponent
+} from '../formatter/expansion.panel/argus.expansion.panel.component';
 
 @Injectable()
 export class ArgusGridProvider {
@@ -44,6 +47,14 @@ export class ArgusGridProvider {
             suppressResize: true,
         };
         columnDefs.unshift(column);
+        let column1 = <ColDef>{
+            colId: '-2',
+            headerName: 'Formatter check',
+            field: 'area',
+            width: 70,
+            cellRendererFramework: ArgusExpansionPanelFormatterComponent,
+        };
+        columnDefs.unshift(column1);
         return columnDefs;
     }
 }
