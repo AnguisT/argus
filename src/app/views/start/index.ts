@@ -1,17 +1,21 @@
+// modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from 'ng2-translate';
 import { AngularSplitModule } from 'angular-split';
-import { ArgusStartComponent } from './argus.start.component';
+import { MatButtonModule } from '@angular/material';
 import { ArgusSelect2Module } from '../../modules/constrols/select2/index';
-import { BaseComponent } from '../base/base.component';
 import { ArgusGridModule } from '../../modules/constrols/grid';
 import { ArgusModalModule } from '../../modules/constrols/modal';
-import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
 import { ArgusColumnModule } from '../../modules/constrols/column';
+import { ArgusAdvancedModule } from '../../modules/constrols/advanced';
+
+// components
+import { ArgusStartComponent } from './argus.start.component';
+import { BaseComponent } from '../base/base.component';
+import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
 import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
-import { MatButtonModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -25,7 +29,8 @@ import { MatButtonModule } from '@angular/material';
         ArgusGridModule,
         ArgusModalModule,
         ArgusColumnModule,
-        MatButtonModule
+        MatButtonModule,
+        ArgusAdvancedModule
     ],
     exports: [
         ArgusStartComponent

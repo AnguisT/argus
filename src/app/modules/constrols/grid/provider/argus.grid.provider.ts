@@ -51,7 +51,7 @@ export class ArgusGridProvider {
             colId: '-2',
             headerName: 'Formatter check',
             field: 'area',
-            width: 70,
+            width: 400,
             cellRendererFramework: ArgusExpansionPanelFormatterComponent,
         };
         columnDefs.unshift(column1);

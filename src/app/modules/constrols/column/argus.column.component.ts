@@ -114,7 +114,9 @@ export class ArgusColumnComponent {
             return flag;
         });
 
-        this.gridProvider.gridOptions.columnDefs = this.gridProvider.getFrozenColumn(this.actualColumn);
+        this.gridProvider.gridOptions.columnDefs = this.gridProvider.getFrozenColumn(
+            this.actualColumn
+        );
     }
 
     filterColumns() {

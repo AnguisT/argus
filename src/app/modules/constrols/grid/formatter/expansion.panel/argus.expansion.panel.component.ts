@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    Injector,
+    ViewEncapsulation,
+    ViewChild
+} from '@angular/core';
 import { ArgusGridProvider } from '../../provider/argus.grid.provider';
 
 @Component({
