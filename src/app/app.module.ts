@@ -20,6 +20,7 @@ import { BaseComponent } from './views/base/base.component';
 import { BaseLanguageComponent } from './views/base/comps/argus.language/argus.language.component';
 import { InMemoryDataService } from './mock-service/in-memory-data.service';
 import { HttpService } from './modules/service/http.service/http.service';
+import { ArgusDetailModule } from './views/detail';
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
@@ -51,7 +52,8 @@ import { HttpService } from './modules/service/http.service/http.service';
         HttpClientInMemoryWebApiModule.forRoot(
             InMemoryDataService, { dataEncapsulation: false, passThruUnknownUrl: true }
         ),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ArgusDetailModule
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         HttpService
