@@ -7,8 +7,9 @@ import {
     EventEmitter,
     Output
 } from '@angular/core';
-import { ArgusSelect2Component } from '../../../select2/argus.select2.component';
-import { ArgusAdvancedProvider } from '../../provider/argus.advanced.provider';
+import { ArgusSelect2Component } from '../../../../../select2/argus.select2.component';
+import { ArgusAdvancedProvider } from '../../../../provider/argus.advanced.provider';
+import { ArgusCriteriaComponent } from '../../argus.criteria.component';
 
 @Component({
     selector: 'argus-control',
@@ -21,6 +22,7 @@ import { ArgusAdvancedProvider } from '../../provider/argus.advanced.provider';
 })
 
 export class ArgusControlComponent {
+    @Input('context') private compContext: ArgusCriteriaComponent;
     @Output('onSelectControl') private onSelectControl: EventEmitter<any> = new EventEmitter<any>();
     @Input('data') private data: any;
     @ViewChild('select') private select: ArgusSelect2Component;
@@ -29,7 +31,7 @@ export class ArgusControlComponent {
 
     ngAfterViewInit() {
         let self = this;
-        this.advancedProvider.getData().subscribe((data: any) => {
+        this.compContext.dataControlReady.subscribe((data: any) => {
             self.select.setData(data);
         });
     }

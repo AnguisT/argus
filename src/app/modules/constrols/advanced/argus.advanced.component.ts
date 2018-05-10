@@ -22,9 +22,12 @@ import { ArgusAdvancedProvider } from './provider/argus.advanced.provider';
 })
 
 export class ArgusAdvancedComponent {
-    public dataControl: any;
-    public dataCondition: any;
-    public dataField: any;
+    // public dataControl: any;
+    // public dataCondition: any;
+    // public dataField: any;
+    public data: any = {};
+    public criteries: Array<any> = [];
+    public crit = {control: '', codition: '', field: ''};
 
     constructor(private advancedProvider: ArgusAdvancedProvider,
                 private cdr: ChangeDetectorRef) {
@@ -33,17 +36,19 @@ export class ArgusAdvancedComponent {
     }
 
     ngOnInit() {
-        this.onSelect(1);
+        // let self = this;
+        // this.advancedProvider.getData().subscribe((data: any) => {
+        //     self.data.dataControl = data;
+        //     self.onSelect(1);
+        // });
     }
 
-    onSelect($event: any) {
-        let self = this;
-        this.advancedProvider.getDataById($event).subscribe((data: any) => {
-            console.log(data);
-            self.dataCondition = [data];
-            self.dataField = [data];
-            self.cdr.detectChanges();
-        });
+    addCriteria() {
+        this.criteries.push(this.crit);
+    }
+
+    removeCriteria(i: number) {
+        this.criteries.splice(i, 1);
     }
 
     onSelectCondition($event: any) {

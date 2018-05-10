@@ -7,8 +7,9 @@ import {
     EventEmitter,
     Output
 } from '@angular/core';
-import { ArgusSelect2Component } from '../../../select2/argus.select2.component';
-import { ArgusAdvancedProvider } from '../../provider/argus.advanced.provider';
+import { ArgusSelect2Component } from '../../../../../select2/argus.select2.component';
+import { ArgusAdvancedProvider } from '../../../../provider/argus.advanced.provider';
+import { ArgusCriteriaComponent } from '../../argus.criteria.component';
 
 @Component({
     selector: 'argus-condition',
@@ -21,6 +22,7 @@ import { ArgusAdvancedProvider } from '../../provider/argus.advanced.provider';
 })
 
 export class ArgusConditionComponent {
+    @Input('context') private compContext: ArgusCriteriaComponent;
     @Output() private onSelectCondition: EventEmitter<any> = new EventEmitter<any>();
     @Input('data') private data: any;
     @ViewChild('select') private select: ArgusSelect2Component;
@@ -29,6 +31,9 @@ export class ArgusConditionComponent {
 
     ngAfterViewInit() {
         let self = this;
+        this.compContext.dataReady.subscribe((data: any) => {
+            self.select.setData(data);
+        });
     }
 
     onSelect($event: any) {

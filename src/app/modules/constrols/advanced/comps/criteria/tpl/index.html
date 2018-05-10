@@ -1,0 +1,16 @@
+<div>
+    <div style="display: flex">
+        <argus-control
+                    (onSelectControl)="onSelect($event)"
+                    [context]="compContext"></argus-control>
+        <argus-condition
+                    (onSelectCondition)="onSelectCondition($event)"
+                    [context]="compContext"></argus-condition>
+        <argus-field
+                (onSelectField)="onSelectField($event)"
+                [context]="compContext"></argus-field>
+        <button mat-icon-button (click)="removeCriteria(i)">
+            <mat-icon title="Remove">close</mat-icon>
+        </button>
+    </div>
+</div>
