@@ -1,1 +1,82 @@
-Hello detail
+<!-- <mat-grid-list cols="2" rowHeight="250px">
+    <mat-grid-tile [colspan]="1" [rowspan]="3" style="background: lightgreen">1</mat-grid-tile>
+    <mat-grid-tile style="background: red">2</mat-grid-tile>
+    <mat-grid-tile style="background: lightblue">3</mat-grid-tile>
+    <mat-grid-tile style="background: orange">4</mat-grid-tile>
+</mat-grid-list> -->
+<div fxLayout="row" style="height: 100%" fxLayout.sm="column" fxLayout.xs="column">
+    <div class="flex" fxFlex.lg="40" fxFlex.md="35" fxFlex.sm="50" fxFlex.xs="50" fxLayout="column">
+        <div class="flex" fxFlex style="background: red">
+            Detail information
+            <div (click)="showPdfFile()" style="cursor: pointer;">Pdf File</div>
+            <pdf-viewer *ngIf="isShow"
+                        id="viewer"
+                        [src]="'/assets/1 - Обзор платформы NodeJS и технологии AJAX.pdf'"
+                        [original-size]="false"
+                        [autoresize]="true"></pdf-viewer>
+            <button mat-fab *ngIf="isShow" style="z-index: 9999;
+                position: fixed;
+                top: 90%;
+                right: 0;
+                bottom: 0;
+                left: 90%;" (click)="isShow=false">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button mat-fab *ngIf="isShow" style="z-index: 9999;
+                position: fixed;
+                top: 80%;
+                right: 0;
+                bottom: 0;
+                left: 90%;" (click)="isShow=false">
+                <mat-icon>cloud_download</mat-icon>
+            </button>
+        </div>
+        <div class="flex" fxFlex.lg="35"
+            fxFlex.md="35"
+            fxFlex.sm="35"
+            fxFlex.xs="35"
+            style="background: lightseagreen">
+            <argus-grid
+                class="ag-theme-material"
+                [gridOptions]="gridOptions"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs">
+            </argus-grid>
+        </div>
+    </div>
+    <div class="flex" fxFlex.lg="60" fxFlex.md="65" fxFlex.sm="50" fxFlex.xs="50" fxLayout="column">
+        <div fxFlex="33" style="background: lightblue" class="flex">
+            <argus-grid
+                class="ag-theme-material"
+                [gridOptions]="gridOptions"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs">
+            </argus-grid>
+        </div>
+        <div fxFlex="33" style="background: lightgreen" class="flex">
+            <argus-grid
+                class="ag-theme-material"
+                [gridOptions]="gridOptions"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs">
+            </argus-grid>
+        </div>
+        <div fxFlex="34" style="background: lightsalmon" class="flex">
+            <argus-grid
+                class="ag-theme-material"
+                [gridOptions]="gridOptions"
+                [rowData]="rowData"
+                [columnDefs]="columnDefs">
+            </argus-grid>
+        </div>
+    </div>
+</div>
+
+<!-- pdv-viewer styles
+position: absolute;
+z-index: 99;
+top: 0;
+right: 80vh;
+max-height: 100%;
+/* width: 100vh; */
+background: rgba(0,0,0,.288); -->

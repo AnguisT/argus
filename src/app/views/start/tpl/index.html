@@ -19,7 +19,8 @@
                     [gridOptions]="gridOptions"
                     [rowData]="rowData"
                     [columnDefs]="columnDefs"
-                    (onGridColumnsChanged)="gridColumnsChanged()">
+                    (onGridColumnsChanged)="gridColumnsChanged()"
+                    (rowDoubleClicked)="goDetailPage($event)">
                 </argus-grid>
             </div>
         </split-area>

@@ -20,13 +20,13 @@ export class ArgusStartProvider {
             self.compContext.columnDefs = self.gridProvider.getFrozenColumn(column);
         });
         this.argusStartService.getDataGrid().subscribe((data) => {
-            this.compContext.rowData = data;
+            self.compContext.rowData = data;
         });
         this.argusStartService.getSelectData().subscribe((data) => {
-            this.compContext.data = data;
+            self.compContext.data = data;
         });
         this.argusStartService.getMultiSelectData().subscribe((data) => {
-            this.compContext.data1 = data;
+            self.compContext.data1 = data;
         });
     }
 

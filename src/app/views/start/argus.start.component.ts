@@ -13,6 +13,7 @@ import { ArgusColumnComponent } from '../../modules/constrols/column/argus.colum
 import { ArgusGridProvider } from '../../modules/constrols/grid/provider/argus.grid.provider';
 import { ArgusStartService } from './service/argus.start.service';
 import { ArgusStartProvider } from './provider/argus.start.provider';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'argus-start',
@@ -54,7 +55,8 @@ export class ArgusStartComponent {
     constructor(private dialog: MatDialog,
                 private gridProvider: ArgusGridProvider,
                 private cdr: ChangeDetectorRef,
-                private argusStartProvider: ArgusStartProvider) {
+                private argusStartProvider: ArgusStartProvider,
+                private router: Router) {
         this.gridProvider.gridOptions = this.gridOptions;
         this.argusStartProvider.compContext = this;
         this.argusStartProvider.gridProvider = this.gridProvider;
@@ -106,5 +108,9 @@ export class ArgusStartComponent {
             allColumnIds.push(columnDef.field);
         });
         this.gridOptions.columnApi.autoSizeColumns(allColumnIds);
+    }
+
+    goDetailPage($event: any) {
+        this.router.navigate(['detail', $event.data.id]);
     }
 }

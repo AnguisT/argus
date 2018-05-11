@@ -33,40 +33,45 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ArgusDetailComponent {
     public columnDefs = <Array<ColDef>>[
     ];
-
-    rowData: any;
+    public rowData: any;
 
     public gridOptions = <GridOptions>{
         enableSorting: true,
         enableFilter: false,
         enableColResize: true,
-        pagination: true,
-        paginationPageSize: 10,
-        rowSelection: 'multiple',
+        pagination: false,
     };
+
+    public isShow: boolean = false;
 
     constructor(private gridProvider: ArgusGridProvider,
                 private cdr: ChangeDetectorRef,
                 private detailProvider: ArgusDetailProvider,
-                private router: ActivatedRoute) {
+                private router: ActivatedRoute,
+                private argusDetailProvider: ArgusDetailProvider) {
         this.gridProvider.gridOptions = this.gridOptions;
+        this.argusDetailProvider.gridProvider = this.gridProvider;
+        this.argusDetailProvider.compContext = this;
         this.router.params.subscribe((params) => {
             console.log(params);
         });
     }
 
-    ngOnInit() {
-        let self = this;
-    }
-
     ngAfterViewInit() {
+        let self = this;
+        this.argusDetailProvider.init();
+        this.cdr.detectChanges();
     }
 
-    // gridColumnsChanged() {
-    //     let allColumnIds: any = [];
-    //     this.columnDefs.forEach( function(columnDef: any) {
-    //         allColumnIds.push(columnDef.field);
-    //     });
-    //     this.gridOptions.columnApi.autoSizeColumns(allColumnIds);
-    // }
+    gridColumnsChanged() {
+        let allColumnIds: any = [];
+        this.columnDefs.forEach( function(columnDef: any) {
+            allColumnIds.push(columnDef.field);
+        });
+        this.gridOptions.columnApi.autoSizeColumns(allColumnIds);
+    }
+
+    showPdfFile() {
+        this.isShow = true;
+    }
 }
