@@ -4,7 +4,7 @@ import { TranslateModule } from 'ng2-translate';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { ArgusGridComponent } from './argus.grid.component';
-import { BaseComponent } from '../../../views/base/base.component';
+import { ArgusBaseComponent } from '../../../views/base/base.component';
 import { ArgusExpansionPanelFormatterModule } from './formatter/expansion.panel';
 import {
     ArgusExpansionPanelFormatterComponent
@@ -18,7 +18,7 @@ import {
         TranslateModule,
         CommonModule,
         AgGridModule.withComponents([
-            BaseComponent,
+            ArgusBaseComponent,
             ArgusExpansionPanelFormatterComponent
         ]),
         ArgusExpansionPanelFormatterModule

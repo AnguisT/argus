@@ -44,6 +44,9 @@ export class ArgusDetailComponent {
 
     public isShow: boolean = false;
 
+    public details: any;
+    private id: number;
+
     constructor(private gridProvider: ArgusGridProvider,
                 private cdr: ChangeDetectorRef,
                 private detailProvider: ArgusDetailProvider,
@@ -53,13 +56,13 @@ export class ArgusDetailComponent {
         this.argusDetailProvider.gridProvider = this.gridProvider;
         this.argusDetailProvider.compContext = this;
         this.router.params.subscribe((params) => {
-            console.log(params);
+            this.id = params.id;
         });
     }
 
     ngAfterViewInit() {
         let self = this;
-        this.argusDetailProvider.init();
+        this.argusDetailProvider.init(this.id);
         this.cdr.detectChanges();
     }
 

@@ -64,8 +64,6 @@ export class ArgusSelect2Component {
             minimumResultsForSearch: self.minimumResultsForSearch,
             allowClear: self.allowClear
         });
-        console.log(self.data);
-
         this.compRef.unbind('select2:select');
         this.compRef.on('select2:select', function (e: any) {
             self.onSelect.emit(self.getSelected());

@@ -10,23 +10,11 @@ export class ArgusDetailService {
         return this.httpService.getMock('api/grid');
     }
 
+    getDataGridById(id: number): Observable<any> {
+        return this.httpService.getMock(`api/grid/${id}`);
+    }
+
     getViewGrid(): Observable<any> {
         return this.httpService.getMock('api/view');
-    }
-
-    getUserViews(): Observable<any> {
-        return this.httpService.getMock('api/userViews');
-    }
-
-    getUserView(id: number): Observable<any> {
-        return this.httpService.getMock(`api/userView/${id}`);
-    }
-
-    getSelectData(): Observable<any> {
-        return this.httpService.getMock('api/data');
-    }
-
-    getMultiSelectData(): Observable<any> {
-        return this.httpService.getMock('api/data1');
     }
 }

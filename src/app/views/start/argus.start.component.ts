@@ -113,4 +113,8 @@ export class ArgusStartComponent {
     goDetailPage($event: any) {
         this.router.navigate(['detail', $event.data.id]);
     }
+
+    onExport() {
+        this.argusStartProvider.exportData();
+    }
 }

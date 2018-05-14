@@ -10,15 +10,28 @@ export class ArgusDetailProvider {
 
     constructor(private argusDetailService: ArgusDetailService) {}
 
-    init() {
+    init(id: number) {
         let self = this;
         this.argusDetailService.getViewGrid().subscribe((data) => {
             let column = self.gridProvider.viewColumnsToGridColumns(data);
             let columnDefs = self.gridProvider.getFrozenColumn(column);
             self.compContext.columnDefs = columnDefs;
-        });
-        this.argusDetailService.getDataGrid().subscribe((data) => {
-            self.compContext.rowData = data;
+            self.argusDetailService.getDataGrid().subscribe((dataGrid) => {
+                self.compContext.rowData = dataGrid;
+                self.argusDetailService.getDataGridById(id).subscribe((detail) => {
+                    // self.compContext.detail = detail;
+                    let arrayDetail: Array<any> = [];
+                    $.each(detail, (key, value) => {
+                        let detal = {
+                            title: key,
+                            val: value,
+                        };
+                        arrayDetail.push(detal);
+                    });
+                    console.log(arrayDetail);
+                    self.compContext.details = arrayDetail;
+                });
+            });
         });
     }
 }

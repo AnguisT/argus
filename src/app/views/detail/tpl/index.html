@@ -6,8 +6,23 @@
 </mat-grid-list> -->
 <div fxLayout="row" style="height: 100%" fxLayout.sm="column" fxLayout.xs="column">
     <div class="flex" fxFlex.lg="40" fxFlex.md="35" fxFlex.sm="50" fxFlex.xs="50" fxLayout="column">
-        <div class="flex" fxFlex style="background: red">
-            Detail information
+        <div class="flex" fxFlex style="background: lightsteelblue">
+            <div *ngFor="let detail of details; let i = index">
+                {{ detail.title }}: {{ detail.val }}
+                <!-- {{ detail.Name_Сompany }}
+                {{ detail.Type_Certified_Activity }}
+                {{ detail.country }}
+                {{ detail.region }}
+                {{ detail.area }}
+                {{ detail.address }}
+                {{ detail.activities }}
+                {{ detail.Product_Type }}
+                {{ detail.View_Product }}
+                {{ detail.Product_Group }}
+                {{ detail.status }}
+                {{ detail.date }}
+                {{ detail.Number_Date }} -->
+            </div>
             <div (click)="showPdfFile()" style="cursor: pointer;">Pdf File</div>
             <pdf-viewer *ngIf="isShow"
                         id="viewer"

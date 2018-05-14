@@ -13,7 +13,6 @@ import { ArgusAdvancedModule } from '../../modules/constrols/advanced';
 
 // components
 import { ArgusStartComponent } from './argus.start.component';
-import { BaseComponent } from '../base/base.component';
 import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
 import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
 

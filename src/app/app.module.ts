@@ -16,8 +16,10 @@ import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArgusStartModule } from './views/start/index';
 
-import { BaseComponent } from './views/base/base.component';
-import { BaseLanguageComponent } from './views/base/comps/argus.language/argus.language.component';
+import { ArgusBaseComponent } from './views/base/base.component';
+import {
+    ArgusTranslateComponent
+} from './views/base/comps/argus.language/argus.language.component';
 import { InMemoryDataService } from './mock-service/in-memory-data.service';
 import { HttpService } from './modules/service/http.service/http.service';
 import { ArgusDetailModule } from './views/detail';
@@ -26,10 +28,10 @@ import { ArgusDetailModule } from './views/detail';
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-    bootstrap: [BaseComponent],
+    bootstrap: [ArgusBaseComponent],
     declarations: [
-        BaseComponent,
-        BaseLanguageComponent
+        ArgusBaseComponent,
+        ArgusTranslateComponent
         // SettingsColumnComponent
         // directives
         // ModalDirective

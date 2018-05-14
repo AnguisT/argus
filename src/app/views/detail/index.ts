@@ -16,7 +16,6 @@ import { ArgusSelect2Module } from '../../modules/constrols/select2/index';
 import { ArgusGridModule } from '../../modules/constrols/grid';
 
 // components
-import { BaseComponent } from '../base/base.component';
 import { ArgusDetailComponent } from './argus.detail.component';
 
 @NgModule({

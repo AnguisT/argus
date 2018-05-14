@@ -10,7 +10,7 @@ import { TranslateService } from 'ng2-translate';
     encapsulation: ViewEncapsulation.None
 })
 
-export class BaseLanguageComponent {
+export class ArgusTranslateComponent {
     constructor(private translate: TranslateService) {}
 
     public changeOnRu() {

@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     ]
 })
 
-export class BaseComponent {
+export class ArgusBaseComponent {
 
   constructor(private translate: TranslateService,
               private router: Router) {

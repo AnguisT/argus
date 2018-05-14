@@ -37,7 +37,6 @@ export class ArgusGridComponent {
     constructor() {}
 
     ngOnInit() {
-        console.log(1);
     }
 
     private rowDoubleClickedHandler(p: any) {
