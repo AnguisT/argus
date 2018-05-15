@@ -25,6 +25,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 
 export class ArgusModalComponent {
+    public buttonTitle: string = 'OK';
     public modalEvents: EventEmitter<any> = new EventEmitter<any>();
     @ViewChild('target', { read: ViewContainerRef }) vcRef: ViewContainerRef;
     componentRef: ComponentRef<any>;
@@ -35,9 +36,13 @@ export class ArgusModalComponent {
     ngOnInit() {
         const factory = this.resolver.resolveComponentFactory(this.data.component);
         this.componentRef = this.vcRef.createComponent(factory);
+        if (this.data.buttonTitle) {
+            this.buttonTitle = this.data.buttonTitle;
+        }
     }
 
     emitClickFooterBtn(name: string, $event: any) {
+        console.log(this.data);
         this.modalEvents.emit({
             name: name,
             $event: $event

@@ -15,6 +15,8 @@ import { ArgusAdvancedModule } from '../../modules/constrols/advanced';
 import { ArgusStartComponent } from './argus.start.component';
 import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
 import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
+import { ArgusExportComponent } from '../../modules/constrols/export/argus.export.component';
+import { ArgusExportModule } from '../../modules/constrols/export';
 
 @NgModule({
     declarations: [
@@ -28,6 +30,7 @@ import { ArgusColumnComponent } from '../../modules/constrols/column/argus.colum
         ArgusGridModule,
         ArgusModalModule,
         ArgusColumnModule,
+        ArgusExportModule,
         MatButtonModule,
         ArgusAdvancedModule,
         MatProgressSpinnerModule
@@ -38,7 +41,8 @@ import { ArgusColumnComponent } from '../../modules/constrols/column/argus.colum
     entryComponents: [
         ArgusStartComponent,
         ArgusModalComponent,
-        ArgusColumnComponent
+        ArgusColumnComponent,
+        ArgusExportComponent
     ]
 })
 

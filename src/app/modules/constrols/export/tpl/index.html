@@ -1,0 +1,18 @@
+<div class="export">
+    <mat-form-field>
+        <input matInput placeholder="Введите название файла" [(ngModel)]="inputString">
+    </mat-form-field>
+    <div class="title">Выберите какие данные хотите экспортировать:</div>
+    <mat-divider></mat-divider>
+    <mat-radio-group class="example-radio-group" [(ngModel)]="typePage">
+        <mat-radio-button [value]="'all_page'">Все страницы</mat-radio-button>
+        <mat-radio-button [value]="'current_page'">Текущая страница</mat-radio-button>
+        <mat-radio-button [value]="'row_selected'">Только выбранные данные</mat-radio-button>
+    </mat-radio-group>
+    <div class="title">Выберите в каком формате экспортировать</div>
+    <mat-divider></mat-divider>
+    <mat-radio-group class="example-radio-group" [(ngModel)]="typeExport">
+        <mat-radio-button [value]="'excel'">Excel</mat-radio-button>
+        <mat-radio-button [value]="'csv'">CSV</mat-radio-button>
+    </mat-radio-group>
+</div>

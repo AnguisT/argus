@@ -14,6 +14,7 @@ import { ArgusGridProvider } from '../../modules/constrols/grid/provider/argus.g
 import { ArgusStartService } from './service/argus.start.service';
 import { ArgusStartProvider } from './provider/argus.start.provider';
 import { Router } from '@angular/router';
+import { ArgusExportComponent } from '../../modules/constrols/export/argus.export.component';
 
 @Component({
     selector: 'argus-start',
@@ -73,7 +74,7 @@ export class ArgusStartComponent {
     ngAfterViewInit() {
     }
 
-    openDialog() {
+    openSetUpColumn() {
         let self = this;
         let dialogRef = this.dialog.open(ArgusModalComponent, {
             width: '500px',
@@ -91,6 +92,25 @@ export class ArgusStartComponent {
         dialogRef.afterClosed().subscribe(() => {
             self.columnDefs = self.gridOptions.columnDefs;
             self.gridOptions.api.refreshCells();
+        });
+    }
+
+    openExport() {
+        let self = this;
+        let dialogRef = this.dialog.open(ArgusModalComponent, {
+            width: '500px',
+            closeOnNavigation: true,
+            data: { title: 'Export', buttonTitle: 'Export', component: ArgusExportComponent },
+        });
+        dialogRef.componentInstance.modalEvents.subscribe((e: any) => {
+            if (e.name === 'ok') {
+                // let typePage = dialogRef.componentInstance.componentRef.instance.typePage;
+                // let typeExport = dialogRef.componentInstance.componentRef.instance.typeExport;
+                dialogRef.componentInstance.componentRef.instance.export();
+                dialogRef.close();
+            } else if (e.name === 'close') {
+                dialogRef.close();
+            }
         });
     }
 
@@ -115,9 +135,5 @@ export class ArgusStartComponent {
 
     goDetailPage($event: any) {
         this.router.navigate(['detail', $event.data.id]);
-    }
-
-    onExport() {
-        this.argusStartProvider.exportData();
     }
 }

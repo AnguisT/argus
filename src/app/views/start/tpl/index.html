@@ -11,8 +11,8 @@
         <split-area size="70" [order]="1">
             <div style="display: flex">
                 <argus-select2 #viewSelect [data]="views" (onSelect)="onSelect($event)"></argus-select2>
-                <button mat-raised-button color="primary" (click)="openDialog()">Set up column</button>
-                <button mat-raised-button color="primary" (click)="onExport()">Export</button>
+                <button mat-raised-button color="primary" (click)="openSetUpColumn()">Set up column</button>
+                <button mat-raised-button color="primary" (click)="openExport()">Export</button>
             </div>
             <div style="height: calc(100% - 36px)">
                 <argus-grid
