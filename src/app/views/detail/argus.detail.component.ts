@@ -8,12 +8,14 @@ import {
 import { GridOptions, ColDef } from 'ag-grid';
 import { Response } from '@angular/http';
 import { MatDialog } from '@angular/material';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
 import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
 import { ArgusGridProvider } from '../../modules/constrols/grid/provider/argus.grid.provider';
 import { ArgusDetailService } from './service/argus.detail.service';
 import { ArgusDetailProvider } from './provider/argus.detail.provider';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'argus-detail',
@@ -45,13 +47,15 @@ export class ArgusDetailComponent {
     public isShow: boolean = false;
 
     public details: any;
+    public isLoaded: boolean = false;
     private id: number;
 
     constructor(private gridProvider: ArgusGridProvider,
                 private cdr: ChangeDetectorRef,
                 private detailProvider: ArgusDetailProvider,
                 private router: ActivatedRoute,
-                private argusDetailProvider: ArgusDetailProvider) {
+                private argusDetailProvider: ArgusDetailProvider,
+                private location: Location) {
         this.gridProvider.gridOptions = this.gridOptions;
         this.argusDetailProvider.gridProvider = this.gridProvider;
         this.argusDetailProvider.compContext = this;
@@ -76,5 +80,9 @@ export class ArgusDetailComponent {
 
     showPdfFile() {
         this.isShow = true;
+    }
+
+    goToBack() {
+        this.location.back();
     }
 }

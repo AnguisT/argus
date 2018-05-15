@@ -28,8 +28,8 @@ export class ArgusDetailProvider {
                         };
                         arrayDetail.push(detal);
                     });
-                    console.log(arrayDetail);
                     self.compContext.details = arrayDetail;
+                    self.compContext.isLoaded = true;
                 });
             });
         });

@@ -65,5 +65,18 @@ body {
       width: 100%;
       background: #edf1f2;
     }
+
+    .spiner {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: 9999;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background: #edf1f2;
+    }
   }
 }

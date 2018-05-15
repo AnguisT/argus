@@ -52,6 +52,8 @@ export class ArgusStartComponent {
         // }
     };
 
+    public isLoaded: boolean = false;
+
     constructor(private dialog: MatDialog,
                 private gridProvider: ArgusGridProvider,
                 private cdr: ChangeDetectorRef,
@@ -65,6 +67,7 @@ export class ArgusStartComponent {
     ngOnInit() {
         let self = this;
         this.argusStartProvider.init();
+        this.cdr.detectChanges();
     }
 
     ngAfterViewInit() {

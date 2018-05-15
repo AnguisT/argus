@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from 'ng2-translate';
 import { AngularSplitModule } from 'angular-split';
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { ArgusSelect2Module } from '../../modules/constrols/select2/index';
 import { ArgusGridModule } from '../../modules/constrols/grid';
 import { ArgusModalModule } from '../../modules/constrols/modal';
@@ -29,7 +29,8 @@ import { ArgusColumnComponent } from '../../modules/constrols/column/argus.colum
         ArgusModalModule,
         ArgusColumnModule,
         MatButtonModule,
-        ArgusAdvancedModule
+        ArgusAdvancedModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         ArgusStartComponent

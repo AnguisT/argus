@@ -7,7 +7,8 @@ import { AngularSplitModule } from 'angular-split';
 import { FormsModule } from '@angular/forms';
 import {
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
@@ -30,7 +31,8 @@ import { ArgusDetailComponent } from './argus.detail.component';
         MatButtonModule,
         MatIconModule,
         FlexLayoutModule,
-        PdfViewerModule
+        PdfViewerModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         ArgusDetailComponent

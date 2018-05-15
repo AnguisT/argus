@@ -16,19 +16,20 @@ export class ArgusStartProvider {
         let self = this;
         this.argusStartService.getUserViews().subscribe((data) => {
             self.compContext.views = data;
-        });
-        this.argusStartService.getViewGrid().subscribe((data) => {
-            let column = self.gridProvider.viewColumnsToGridColumns(data);
-            self.compContext.columnDefs = self.gridProvider.getFrozenColumn(column);
-        });
-        this.argusStartService.getDataGrid().subscribe((data) => {
-            self.compContext.rowData = data;
-        });
-        this.argusStartService.getSelectData().subscribe((data) => {
-            self.compContext.data = data;
-        });
-        this.argusStartService.getMultiSelectData().subscribe((data) => {
-            self.compContext.data1 = data;
+            self.argusStartService.getViewGrid().subscribe((data1) => {
+                let column = self.gridProvider.viewColumnsToGridColumns(data1);
+                self.compContext.columnDefs = self.gridProvider.getFrozenColumn(column);
+                self.argusStartService.getDataGrid().subscribe((data2) => {
+                    self.compContext.rowData = data2;
+                    self.argusStartService.getSelectData().subscribe((data3) => {
+                        self.compContext.data = data3;
+                        self.argusStartService.getMultiSelectData().subscribe((data4) => {
+                            self.compContext.data1 = data4;
+                            self.compContext.isLoaded = true;
+                        });
+                    });
+                });
+            });
         });
     }
 
