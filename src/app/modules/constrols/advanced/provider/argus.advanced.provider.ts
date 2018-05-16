@@ -9,10 +9,20 @@ export class ArgusAdvancedProvider {
 
     constructor(private advancedService: ArgusAdvancedService) {}
 
+    init() {
+        let self = this;
+        this.advancedService.getControls().subscribe((controls) => {
+            self.advancedService.getAdvanced().subscribe((advanced) => {
+                self.compContext.crit.control = controls;
+                self.compContext.advanced = advanced;
+            });
+        });
+    }
+
     getData() {
         let self = this;
         return Observable.create((observer: any) => {
-            this.advancedService.getSelectData().subscribe((data) => {
+            self.advancedService.getSelectData().subscribe((data) => {
                 observer.next(data);
             });
         });

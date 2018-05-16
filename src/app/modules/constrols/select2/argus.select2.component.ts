@@ -62,7 +62,8 @@ export class ArgusSelect2Component {
             width: self.width,
             placeholder: self.placeholder,
             minimumResultsForSearch: self.minimumResultsForSearch,
-            allowClear: self.allowClear
+            allowClear: self.allowClear,
+            multiple: self.multi
         });
         this.compRef.unbind('select2:select');
         this.compRef.on('select2:select', function (e: any) {
@@ -71,9 +72,11 @@ export class ArgusSelect2Component {
     }
 
     setData(data: any) {
-        console.log(data);
-        this.data = data;
-        this.cdr.detectChanges();
+        if (data && data !== '') {
+            console.log(data);
+            this.data = data;
+            this.cdr.detectChanges();
+        }
     }
 
     reInit() {

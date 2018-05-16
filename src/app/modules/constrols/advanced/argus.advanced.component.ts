@@ -28,6 +28,7 @@ export class ArgusAdvancedComponent {
     public data: any = {};
     public criteries: Array<any> = [];
     public crit = {control: '', codition: '', field: ''};
+    public advanced: any;
 
     constructor(private advancedProvider: ArgusAdvancedProvider,
                 private cdr: ChangeDetectorRef) {
@@ -41,10 +42,12 @@ export class ArgusAdvancedComponent {
         //     self.data.dataControl = data;
         //     self.onSelect(1);
         // });
+        this.advancedProvider.init();
     }
 
     addCriteria() {
         this.criteries.push(this.crit);
+        this.cdr.detectChanges();
     }
 
     removeCriteria(i: number) {

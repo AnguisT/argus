@@ -31,12 +31,23 @@ export class ArgusControlComponent {
 
     ngAfterViewInit() {
         let self = this;
-        this.compContext.dataControlReady.subscribe((data: any) => {
-            self.select.setData(data);
+        let selectData: Array<any> = [];
+        this.data.forEach((element: any) => {
+            selectData.push({id: element.id, text: element.Name});
         });
+        // this.compContext.dataControlReady.subscribe((data: any) => {
+        this.select.setData(selectData);
+        this.select.setSelectedById(1);
+        // });
     }
 
     onSelect($event: any) {
-        this.onSelectControl.emit($event);
+        let selectedControl = this.data.filter((control: any) => {
+            if (control.id.toString() === $event) {
+                return true;
+            }
+            return false;
+        });
+        this.onSelectControl.emit(selectedControl);
     }
 }

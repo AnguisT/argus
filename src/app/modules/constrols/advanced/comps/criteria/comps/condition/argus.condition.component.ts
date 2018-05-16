@@ -27,13 +27,18 @@ export class ArgusConditionComponent {
     @Input('data') private data: any;
     @ViewChild('select') private select: ArgusSelect2Component;
 
-    constructor(private advancedProvider: ArgusAdvancedProvider) {}
+    constructor(private advancedProvider: ArgusAdvancedProvider) {
+    }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         let self = this;
-        this.compContext.dataReady.subscribe((data: any) => {
+        this.compContext.dataConditionReady.subscribe((data: any) => {
             self.select.setData(data);
         });
+    }
+
+    ngAfterViewInit() {
+        this.select.setData(this.data);
     }
 
     onSelect($event: any) {

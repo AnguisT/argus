@@ -1,14 +1,17 @@
 <div>
     <div class="criteria">
         <argus-control
-                    (onSelectControl)="onSelect($event)"
-                    [context]="compContext"></argus-control>
+                (onSelectControl)="onSelect($event)"
+                [context]="compContext"
+                [data]="data.control"></argus-control>
         <argus-condition
-                    (onSelectCondition)="onSelectCondition($event)"
-                    [context]="compContext"></argus-condition>
+                (onSelectCondition)="onSelectCondition($event)"
+                [context]="compContext"
+                [data]="data.condition"></argus-condition>
         <argus-field
                 (onSelectField)="onSelectField($event)"
-                [context]="compContext"></argus-field>
+                [context]="compContext"
+                [data]="data.field"></argus-field>
         <button mat-icon-button (click)="removeCriteria(i)">
             <mat-icon title="Remove">close</mat-icon>
         </button>

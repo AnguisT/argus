@@ -426,6 +426,62 @@ export class InMemoryDataService implements InMemoryDbService {
         }
     ];
 
-    return {grid, data, data1, view, userViews, userView};
+    const controls = [
+        {
+            id: 1,
+            Name: 'Название предприятия',
+            EditorType: 'TextBox',
+        },
+        {
+            id: 2,
+            Name: 'Группа стран',
+            dbField: 'Group_Country',
+            EditorType: 'ComboMulti',
+        },
+        {
+            id: 3,
+            Name: 'Страна',
+            dbField: 'Country',
+            EditorType: 'ComboSingle',
+        }
+    ];
+
+    const advanced = {
+        conditions: {
+            ComboMulti: ['=', '!='],
+            ComboSingle: ['=', '!='],
+            TextBox: ['Содержит', 'Не содержит', '=', '!='],
+        },
+        Group_Country: [
+            {
+                ID: 1,
+                Name: 'Россия'
+            },
+            {
+                ID: 2,
+                Name: 'Абхазия'
+            },
+            {
+                ID: 3,
+                Name: 'Беларусь'
+            }
+        ],
+        Country: [
+            {
+                ID: 1,
+                Name: 'Россия'
+            },
+            {
+                ID: 2,
+                Name: 'Абхазия'
+            },
+            {
+                ID: 3,
+                Name: 'Беларусь'
+            }
+        ]
+    };
+
+    return {grid, data, data1, view, userViews, userView, controls, advanced};
   }
 }

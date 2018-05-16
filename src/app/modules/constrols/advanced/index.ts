@@ -36,6 +36,7 @@ import { ArgusCriteriaComponent } from './comps/criteria/argus.criteria.componen
         ArgusSelect2Module,
         MatButtonModule,
         MatIconModule,
+        MatInputModule,
         MatProgressSpinnerModule
     ],
     exports: [

@@ -6,6 +6,14 @@ import { Observable } from 'rxjs';
 export class ArgusAdvancedService {
     constructor(private httpService: HttpService) {}
 
+    getControls(): Observable<any> {
+        return this.httpService.getMock('api/controls');
+    }
+
+    getAdvanced(type?: any): Observable<any> {
+        return this.httpService.getMock(`api/advanced`);
+    }
+
     getSelectData(): Observable<any> {
         return this.httpService.getMock('api/data');
     }

@@ -1,3 +1,5 @@
 <div>
-    <argus-select2 #select (onSelect)="onSelect($event)" [width]="'150px'" [firstEmpty]="false"></argus-select2>
+    <argus-select2 *ngIf="type.isComboMulti" #select (onSelect)="onSelect($event)" [multi]="true" [allowClear]="true"></argus-select2>
+    <argus-select2 *ngIf="type.isComboSingle" #select (onSelect)="onSelect($event)"></argus-select2>
+    <input style="height: 22px" *ngIf="type.isTextBox" [(ngModel)]="inputString">
 </div>
