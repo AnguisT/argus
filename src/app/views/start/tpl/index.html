@@ -1,11 +1,12 @@
 <div style="height: 100%; display: flex; flex-direction: column;">
+    <h2>{{ 'start.title' | translate }}</h2>
     <split [direction]="'horizantal'">
         <split-area size="30" [order]="0">
             <argus-advanced></argus-advanced>
         </split-area>
         <split-area size="70" [order]="1">
             <div style="display: flex">
-                <argus-select2 #viewSelect [data]="views" (onSelect)="onSelect($event)"></argus-select2>
+                <!-- <argus-select2 #viewSelect [data]="views" (onSelect)="onSelect($event)"></argus-select2> -->
                 <button mat-raised-button color="primary" (click)="openSetUpColumn()">Set up column</button>
                 <button mat-raised-button color="primary" (click)="openExport()">Export</button>
             </div>

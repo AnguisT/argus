@@ -15,13 +15,41 @@ import * as XLSX from 'xlsx';
 })
 
 export class ArgusExportComponent {
-    private typePage: string = 'all_page';
+    private typePage: string = 'page_range';
     private typeExport: string = 'excel';
     private inputString: string = '';
     private provider: ArgusGridProvider;
+    private fromNumber: number = 1;
+    private toNumber: number = 1;
 
     constructor(private gridProvider: ArgusGridProvider) {
         this.provider = this.gridProvider;
+    }
+
+    toValid() {
+        if (this.toNumber > 999) {
+            this.toNumber = 999;
+        }
+        if (this.toNumber < this.fromNumber) {
+            this.toNumber = this.fromNumber;
+        }
+        let count: number = this.toNumber - this.fromNumber;
+        if (count > 10) {
+            this.toNumber = this.toNumber - (count - 10);
+        }
+    }
+
+    fromValid() {
+        if (this.fromNumber > 999) {
+            this.fromNumber = 999;
+        }
+        if (this.fromNumber > this.toNumber) {
+            this.fromNumber = this.toNumber;
+        }
+        let count: number = this.toNumber - this.fromNumber;
+        if (count > 10) {
+            this.fromNumber = this.fromNumber + (count - 10);
+        }
     }
 
     export() {
@@ -33,24 +61,30 @@ export class ArgusExportComponent {
     }
 
     exportCSV() {
-        if (this.typePage === 'all_page' || this.typePage === 'row_selected') {
+        if (this.typePage === 'row_selected') {
             let params = {
-                onlySelected: this.typePage === 'row_selected',
+                onlySelected: true,
                 fileName: this.inputString === '' ? 'export' : this.inputString,
             };
             this.provider.gridOptions.api.exportDataAsCsv(params);
-        } else {
+        } else if (this.typePage === 'current_page') {
             let json: Array<any> = [];
 
             json = this.getRowsFromCurrentPage();
+
+            new Angular5Csv(json, this.inputString === '' ? 'export' : this.inputString);
+        } else if (this.typePage === 'page_range') {
+            let json: Array<any> = [];
+
+            json = this.getRowsFromCurrentPage(this.fromNumber, this.toNumber);
 
             new Angular5Csv(json, this.inputString === '' ? 'export' : this.inputString);
         }
     }
 
     exportExcel() {
-        if (this.typePage === 'all_page') {
-            this.exportAllPage();
+        if (this.typePage === 'page_range') {
+            this.exportPageRangePage();
         } else if (this.typePage === 'current_page') {
             this.exportCurrentPage();
         } else if (this.typePage === 'row_selected') {
@@ -74,11 +108,11 @@ export class ArgusExportComponent {
         this.exportAsExcelFile(json);
     }
 
-    exportAllPage() {
+    exportPageRangePage() {
         let json: Array<any> = [];
-        this.provider.gridOptions.api.forEachNode((val) => {
-            json.push(val.data);
-        });
+
+        json = this.getRowsFromCurrentPage(this.fromNumber, this.toNumber);
+
         this.exportAsExcelFile(json);
     }
 
@@ -105,13 +139,20 @@ export class ArgusExportComponent {
         XLSX.writeFile(wb, `${fileNmae}.xlsx`, { cellStyles: true });
     }
 
-    getRowsFromCurrentPage() {
+    getRowsFromCurrentPage(start?: number, end?: number) {
         let json: Array<any> = [];
 
         let currentPage = this.provider.gridOptions.api.paginationGetCurrentPage() + 1;
         let paginationSize = this.provider.gridOptions.api.paginationGetPageSize();
-        let countRowEnd = currentPage * paginationSize;
-        let countRowStart = countRowEnd - paginationSize;
+        let countRowStart: number;
+        let countRowEnd: number;
+        if (start && end) {
+            countRowEnd = end * paginationSize;
+            countRowStart = (paginationSize * start) - paginationSize;
+        } else {
+            countRowEnd = currentPage * paginationSize;
+            countRowStart = countRowEnd - paginationSize;
+        }
 
         this.provider.gridOptions.api.forEachNode((val) => {
             if (val.rowIndex >= countRowStart && val.rowIndex < countRowEnd) {
