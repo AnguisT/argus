@@ -17,16 +17,13 @@ export class ArgusStartProvider {
             self.compContext.views = data;
             self.argusStartService.getViewGrid().subscribe((data1) => {
                 let column = self.gridProvider.viewColumnsToGridColumns(data1);
+                let columns1 = self.gridProvider.viewColumnsToGridColumns1(data1);
                 self.compContext.columnDefs = self.gridProvider.getFrozenColumn(column);
+                self.compContext.gridConfig.columnDef = columns1;
                 self.argusStartService.getDataGrid().subscribe((data2) => {
-                    self.compContext.rowData = data2;
-                    self.argusStartService.getSelectData().subscribe((data3) => {
-                        self.compContext.data = data3;
-                        self.argusStartService.getMultiSelectData().subscribe((data4) => {
-                            self.compContext.data1 = data4;
-                            self.compContext.isLoaded = true;
-                        });
-                    });
+                    self.compContext.gridConfig.rowData = data2;
+                    self.compContext.isLoaded = true;
+                    self.compContext.dataLoaded.emit();
                 });
             });
         });

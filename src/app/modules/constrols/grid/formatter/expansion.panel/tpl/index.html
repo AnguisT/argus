@@ -1,6 +1,6 @@
 <div #expansivePanel>
-    <mat-expansion-panel (opened)="toggleExpansionPanel(true)"
-                        (closed)="toggleExpansionPanel(false)">
+    <mat-expansion-panel #panel (opened)="toggleExpand.emit(true)"
+                        (closed)="toggleExpand.emit(false)">
 
         <mat-expansion-panel-header>
 
@@ -10,6 +10,7 @@
 
             <mat-panel-description>
                 Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                <a (click)="click()">Click me</a>
             </mat-panel-description>
 
         </mat-expansion-panel-header>

@@ -3,7 +3,8 @@ import {
     ViewEncapsulation,
     Input,
     ViewChild,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    EventEmitter
 } from '@angular/core';
 import { GridOptions, ColDef } from 'ag-grid';
 import { Response } from '@angular/http';
@@ -15,6 +16,8 @@ import { ArgusStartService } from './service/argus.start.service';
 import { ArgusStartProvider } from './provider/argus.start.provider';
 import { Router } from '@angular/router';
 import { ArgusExportComponent } from '../../modules/constrols/export/argus.export.component';
+import { GridConfig } from '../../modules/constrols/grid/types';
+import DevExpress from 'devextreme/bundles/dx.all';
 
 @Component({
     selector: 'argus-start',
@@ -35,10 +38,13 @@ export class ArgusStartComponent {
     public data: any = [];
     public data1: any = [];
     public views: any = [];
+    public dataLoaded: EventEmitter<any> = new EventEmitter<any>();
     @ViewChild('viewSelect') private viewSelect: any;
 
     public columnDefs = <Array<ColDef>>[
     ];
+
+    public columns: Array<DevExpress.ui.dxDataGridColumn> = [];
 
     rowData: any;
 
@@ -51,6 +57,10 @@ export class ArgusStartComponent {
         rowSelection: 'multiple',
         // onGridReady: () => {
         // }
+    };
+
+    public gridConfig = <GridConfig>{
+        compContext: this,
     };
 
     public isLoaded: boolean = false;
@@ -68,7 +78,9 @@ export class ArgusStartComponent {
     ngOnInit() {
         let self = this;
         this.argusStartProvider.init();
-        this.cdr.detectChanges();
+        this.dataLoaded.subscribe(() => {
+            self.cdr.detectChanges();
+        });
     }
 
     ngAfterViewInit() {

@@ -3,6 +3,7 @@ import { ColDef, GridOptions } from 'ag-grid';
 import {
     ArgusExpansionPanelFormatterComponent
 } from '../formatter/expansion.panel/argus.expansion.panel.component';
+import DevExpress from 'devextreme/bundles/dx.all';
 
 @Injectable()
 export class ArgusGridProvider {
@@ -22,6 +23,27 @@ export class ArgusGridProvider {
                 width: 150,
                 suppressResize: !col.CanUserResize,
                 suppressSorting: !col.CanUserSort,
+            };
+        });
+
+        let res = <any>[];
+
+        $.each(gridCols, (k, v) => {
+            res.push(v);
+        });
+
+        return res;
+    }
+
+    viewColumnsToGridColumns1(cols: any): ColDef[] {
+        let gridCols: {
+            [key: string]: DevExpress.ui.dxDataGridColumn
+        } = {};
+        let id = 0;
+        $.each(cols, (k, col) => {
+            gridCols[k] = <DevExpress.ui.dxDataGridColumn>{
+                dataField: col.BindingName,
+                caption: col.TemplateName,
             };
         });
 

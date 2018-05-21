@@ -3,9 +3,11 @@ import {
     Component,
     Injector,
     ViewEncapsulation,
-    ViewChild
+    ViewChild,
+    EventEmitter
 } from '@angular/core';
 import { ArgusGridProvider } from '../../provider/argus.grid.provider';
+import { MatExpansionPanel } from '@angular/material';
 
 @Component({
     selector: 'expansion-panel-formatter-comp',
@@ -17,10 +19,12 @@ import { ArgusGridProvider } from '../../provider/argus.grid.provider';
     encapsulation: ViewEncapsulation.None
 })
 export class ArgusExpansionPanelFormatterComponent {
-    private panelOpenState: boolean;
+    public panelOpenState: boolean;
     private params: any;
     private gridProvider: ArgusGridProvider;
-    @ViewChild('expansivePanel') private expansivePanel: any;
+    public toggleExpand: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @ViewChild('expansivePanel') public expansivePanel: any;
+    @ViewChild('panel') public panel: MatExpansionPanel;
 
     constructor(private injector: Injector) {}
 
@@ -28,6 +32,10 @@ export class ArgusExpansionPanelFormatterComponent {
     agInit(params: any): void {
         this.params = params;
         this.gridProvider = this.injector.get(ArgusGridProvider);
+    }
+
+    click() {
+        console.log('click on tag a');
     }
 
     toggleExpansionPanel(toggle: boolean) {

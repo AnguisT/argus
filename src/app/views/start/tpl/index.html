@@ -1,27 +1,29 @@
 <div style="height: 100%; display: flex; flex-direction: column;">
     <h2>{{ 'start.title' | translate }}</h2>
-    <split [direction]="'horizantal'">
-        <split-area size="30" [order]="0">
+    <div fxLayout="row" style="height: 100%" fxLayout.sm="column" fxLayout.xs="column">
+        <div fxFlex="40">
             <argus-advanced></argus-advanced>
-        </split-area>
-        <split-area size="70" [order]="1">
-            <div style="display: flex">
+        </div>
+        <div fxFlex="60" fxLayout="column">
+            <div>
                 <!-- <argus-select2 #viewSelect [data]="views" (onSelect)="onSelect($event)"></argus-select2> -->
                 <button mat-raised-button color="primary" (click)="openSetUpColumn()">Set up column</button>
                 <button mat-raised-button color="primary" (click)="openExport()">Export</button>
             </div>
-            <div style="height: calc(100% - 36px)">
-                <argus-grid
+            <div style="height: calc(100% - 36px); width: 100%;">
+                <!-- <argus-grid
                     class="ag-theme-material"
                     [gridOptions]="gridOptions"
                     [rowData]="rowData"
                     [columnDefs]="columnDefs"
                     (onGridColumnsChanged)="gridColumnsChanged()"
                     (rowDoubleClicked)="goDetailPage($event)">
-                </argus-grid>
+                </argus-grid> -->
+                <!-- <argus-grid2></argus-grid2> -->
+                <argus-grid3 [gridConfig]="gridConfig"></argus-grid3>
             </div>
-        </split-area>
-    </split>
+        </div>
+    </div>
     <div *ngIf="!isLoaded" class="spiner">
         <mat-spinner></mat-spinner>
     </div>
