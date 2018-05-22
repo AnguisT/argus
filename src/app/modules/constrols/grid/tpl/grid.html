@@ -1,0 +1,19 @@
+<div style="height: 100%; width: 100%">
+    <ngx-datatable #dataTable
+        style="height: 100%"
+        class="material expandable"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [selectionType]="'checkbox'"
+        [scrollbarV]="true"
+        [groupExpansionDefault]="true">
+    </ngx-datatable>
+</div>
+
+<ng-template #hdrCh ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected" let-selectFn="selectFn">
+    <mat-checkbox style="height: 15px; width: 15px" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"></mat-checkbox>
+</ng-template>
+<ng-template #rowCh ngx-datatable-cell-template let-value="value" let-isSelected="isSelected" let-onCheckboxChangeFn="onCheckboxChangeFn">
+    <mat-checkbox style="height: 15px; width: 15px" [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+</ng-template>
