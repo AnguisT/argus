@@ -3,22 +3,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from 'ng2-translate';
-import { AngularSplitModule } from 'angular-split';
 import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { ArgusSelect2Module } from '../../modules/constrols/select2/index';
-import { ArgusGridModule } from '../../modules/constrols/grid';
-import { ArgusModalModule } from '../../modules/constrols/modal';
-import { ArgusColumnModule } from '../../modules/constrols/column';
-import { ArgusAdvancedModule } from '../../modules/constrols/advanced';
+import { ArgusGridModule } from '../../modules/controls/grid';
+import { ArgusModalModule } from '../../modules/controls/modal';
 
 // components
 import { ArgusStartComponent } from './argus.start.component';
-import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
-import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
-import { ArgusExportComponent } from '../../modules/constrols/export/argus.export.component';
-import { ArgusExportModule } from '../../modules/constrols/export';
+import { ArgusModalComponent } from '../../modules/controls/modal/argus.modal.component';
+import { ArgusExportComponent } from '../../modules/controls/export/argus.export.component';
+import { ArgusExportModule } from '../../modules/controls/export';
 
 @NgModule({
     declarations: [
@@ -27,14 +22,10 @@ import { ArgusExportModule } from '../../modules/constrols/export';
     imports: [
         CommonModule,
         TranslateModule,
-        ArgusSelect2Module,
-        AngularSplitModule,
         ArgusGridModule,
         ArgusModalModule,
-        ArgusColumnModule,
         ArgusExportModule,
         MatButtonModule,
-        ArgusAdvancedModule,
         MatProgressSpinnerModule,
         FlexLayoutModule
     ],
@@ -44,7 +35,6 @@ import { ArgusExportModule } from '../../modules/constrols/export';
     entryComponents: [
         ArgusStartComponent,
         ArgusModalComponent,
-        ArgusColumnComponent,
         ArgusExportComponent
     ]
 })

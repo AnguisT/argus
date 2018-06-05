@@ -3,18 +3,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from 'ng2-translate';
-import { AngularSplitModule } from 'angular-split';
 import { FormsModule } from '@angular/forms';
-import {
-    MatButtonModule,
-    MatIconModule,
-    MatProgressSpinnerModule
-} from '@angular/material';
+import { MatProgressSpinnerModule, MatButtonModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-import { ArgusSelect2Module } from '../../modules/constrols/select2/index';
-import { ArgusGridModule } from '../../modules/constrols/grid';
+import { ArgusGridModule } from '../../modules/controls/grid/index';
+import { ArgusPdfModule } from '../../modules/controls/pdf/index';
+import { ArgusAccordionModule } from '../../modules/controls/accordion/index';
 
 // components
 import { ArgusDetailComponent } from './argus.detail.component';
@@ -28,11 +23,11 @@ import { ArgusDetailComponent } from './argus.detail.component';
         FormsModule,
         TranslateModule,
         ArgusGridModule,
-        MatButtonModule,
-        MatIconModule,
         FlexLayoutModule,
-        PdfViewerModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        ArgusPdfModule,
+        MatButtonModule,
+        ArgusAccordionModule
     ],
     exports: [
         ArgusDetailComponent

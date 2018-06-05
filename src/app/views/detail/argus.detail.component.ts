@@ -3,19 +3,19 @@ import {
     ViewEncapsulation,
     Input,
     ViewChild,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    EventEmitter
 } from '@angular/core';
-import { GridOptions, ColDef } from 'ag-grid';
 import { Response } from '@angular/http';
 import { MatDialog } from '@angular/material';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ArgusModalComponent } from '../../modules/constrols/modal/argus.modal.component';
-import { ArgusColumnComponent } from '../../modules/constrols/column/argus.column.component';
-import { ArgusGridProvider } from '../../modules/constrols/grid/provider/argus.grid.provider';
+import { ArgusModalComponent } from '../../modules/controls/modal/argus.modal.component';
+import { ArgusGridProvider } from '../../modules/controls/grid/provider/argus.grid.provider';
 import { ArgusDetailService } from './service/argus.detail.service';
 import { ArgusDetailProvider } from './provider/argus.detail.provider';
+import { GridConfig } from '../../modules/controls/grid/types';
 
 @Component({
     selector: 'argus-detail',
@@ -33,22 +33,21 @@ import { ArgusDetailProvider } from './provider/argus.detail.provider';
 })
 
 export class ArgusDetailComponent {
-    public columnDefs = <Array<ColDef>>[
-    ];
-    public rowData: any;
+    public dataLoaded: EventEmitter<any> = new EventEmitter<any>();
 
-    public gridOptions = <GridOptions>{
-        enableSorting: true,
-        enableFilter: false,
-        enableColResize: true,
-        pagination: false,
+    public gridConfig = <GridConfig>{
+        compContext: this,
     };
 
     public isShow: boolean = false;
-
     public details: any;
     public isLoaded: boolean = false;
+    public isTabs: boolean = false;
+
     private id: number;
+
+    private src: string = '/assets/1 - Обзор платформы NodeJS и технологии AJAX.pdf';
+    private fileName: string = 'Document';
 
     constructor(private gridProvider: ArgusGridProvider,
                 private cdr: ChangeDetectorRef,
@@ -56,7 +55,6 @@ export class ArgusDetailComponent {
                 private router: ActivatedRoute,
                 private argusDetailProvider: ArgusDetailProvider,
                 private location: Location) {
-        this.gridProvider.gridOptions = this.gridOptions;
         this.argusDetailProvider.gridProvider = this.gridProvider;
         this.argusDetailProvider.compContext = this;
         this.router.params.subscribe((params) => {
@@ -64,22 +62,9 @@ export class ArgusDetailComponent {
         });
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         let self = this;
         this.argusDetailProvider.init(this.id);
-        this.cdr.detectChanges();
-    }
-
-    gridColumnsChanged() {
-        let allColumnIds: any = [];
-        this.columnDefs.forEach( function(columnDef: any) {
-            allColumnIds.push(columnDef.field);
-        });
-        this.gridOptions.columnApi.autoSizeColumns(allColumnIds);
-    }
-
-    showPdfFile() {
-        this.isShow = true;
     }
 
     goToBack() {

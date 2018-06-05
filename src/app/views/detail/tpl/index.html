@@ -2,70 +2,35 @@
     <button mat-raised-button (click)="goToBack()" color="primary" style="width: 100px">Back</button>
     <div fxLayout="row" style="height: 100%" fxLayout.sm="column" fxLayout.xs="column">
         <div class="flex" fxFlex.lg="40" fxFlex.md="35" fxFlex.sm="50" fxFlex.xs="50" fxLayout="column">
-            <div class="flex" fxFlex style="background: lightsteelblue">
-                <div *ngFor="let detail of details; let i = index">
-                    {{ detail.title }}: {{ detail.val }}
-                </div>
-                <div (click)="showPdfFile()" style="cursor: pointer;">Pdf File</div>
-                <pdf-viewer *ngIf="isShow"
-                            id="viewer"
-                            [src]="'/assets/1 - Обзор платформы NodeJS и технологии AJAX.pdf'"
-                            [original-size]="false"
-                            [autoresize]="true"></pdf-viewer>
-                <button mat-fab *ngIf="isShow" style="z-index: 9999;
-                    position: fixed;
-                    top: 90%;
-                    right: 0;
-                    bottom: 0;
-                    left: 90%;" (click)="isShow=false">
-                    <mat-icon>close</mat-icon>
-                </button>
-                <button mat-fab *ngIf="isShow" style="z-index: 9999;
-                    position: fixed;
-                    top: 80%;
-                    right: 0;
-                    bottom: 0;
-                    left: 90%;" (click)="isShow=false">
-                    <mat-icon>cloud_download</mat-icon>
-                </button>
+            <div class="flex"
+                fxFlex.lg="65"
+                fxFlex.md="65"
+                fxFlex.sm="65"
+                fxFlex.xs="65"
+                style="background: lightsteelblue; overflow: auto">
+
+                <argus-accordion [data]="details"></argus-accordion>
+
+                <argus-pdf [fileName]="fileName" [src]="src"></argus-pdf>
             </div>
-            <div class="flex" fxFlex.lg="35"
+            <div class="flex"
+                fxFlex.lg="35"
                 fxFlex.md="35"
                 fxFlex.sm="35"
                 fxFlex.xs="35"
                 style="background: lightseagreen">
-                <argus-grid
-                    class="ag-theme-material"
-                    [gridOptions]="gridOptions"
-                    [rowData]="rowData"
-                    [columnDefs]="columnDefs">
-                </argus-grid>
+                <argus-grid [gridConfig]="gridConfig"></argus-grid>
             </div>
         </div>
         <div class="flex" fxFlex.lg="60" fxFlex.md="65" fxFlex.sm="50" fxFlex.xs="50" fxLayout="column">
             <div fxFlex="33" style="background: lightblue" class="flex">
-                <argus-grid
-                    class="ag-theme-material"
-                    [gridOptions]="gridOptions"
-                    [rowData]="rowData"
-                    [columnDefs]="columnDefs">
-                </argus-grid>
+                <argus-grid [gridConfig]="gridConfig"></argus-grid>
             </div>
             <div fxFlex="33" style="background: lightgreen" class="flex">
-                <argus-grid
-                    class="ag-theme-material"
-                    [gridOptions]="gridOptions"
-                    [rowData]="rowData"
-                    [columnDefs]="columnDefs">
-                </argus-grid>
+                <argus-grid [gridConfig]="gridConfig"></argus-grid>
             </div>
             <div fxFlex="34" style="background: lightsalmon" class="flex">
-                <argus-grid
-                    class="ag-theme-material"
-                    [gridOptions]="gridOptions"
-                    [rowData]="rowData"
-                    [columnDefs]="columnDefs">
-                </argus-grid>
+                <argus-grid [gridConfig]="gridConfig"></argus-grid>
             </div>
         </div>
     </div>

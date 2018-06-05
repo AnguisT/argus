@@ -4,5 +4,24 @@
     "en": "ENG",
     "start": {
         "title": "Registry of enterprises of foreign countries"
-    }
+    },
+    "grid": {
+        "export_selected_data": "Export selected data"
+    },
+    "id": "№",
+    "number": "Number",
+    "Name_Сompany": "Name Сompany",
+    "Type_Certified_Activity": "Type certified activity",
+    "country": "Сountry",
+    "region": "Region",
+    "area": "Area",
+    "address": "Address",
+    "activities": "Activities",
+    "Product_Type": "Product type",
+    "Production": "Production",
+    "View_Product": "View product",
+    "Product_Group": "Product group",
+    "status": "Status",
+    "date": "Date",
+    "Number_Date": "Number date"
 }

@@ -1,5 +1,4 @@
-// NG Modules
-import { ApplicationRef, ChangeDetectorRef, NgModule } from '@angular/core';
+import { ApplicationRef, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,16 +6,13 @@ import { Http, HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule, TranslateStaticLoader } from 'ng2-translate';
-import { AngularSplitModule } from 'angular-split';
-import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
-// Modules
 import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ArgusStartModule } from './views/start/index';
 
-import { ArgusBaseComponent } from './views/base/base.component';
+import { ArgusBaseComponent } from './views/base/argus.base.component';
 import {
     ArgusTranslateComponent
 } from './views/base/comps/argus.language/argus.language.component';
@@ -24,19 +20,13 @@ import { InMemoryDataService } from './mock-service/in-memory-data.service';
 import { HttpService } from './modules/service/http.service/http.service';
 import { ArgusDetailModule } from './views/detail';
 
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
     bootstrap: [ArgusBaseComponent],
     declarations: [
         ArgusBaseComponent,
         ArgusTranslateComponent
-        // SettingsColumnComponent
-        // directives
-        // ModalDirective
     ],
-    imports: [ // import Angular's modules
+    imports: [
         CommonModule,
         BrowserModule,
         FormsModule,
@@ -49,7 +39,6 @@ import { ArgusDetailModule } from './views/detail';
             deps: [Http]
         }),
         ArgusStartModule,
-        AngularSplitModule,
         HttpClientModule,
         HttpClientInMemoryWebApiModule.forRoot(
             InMemoryDataService, { dataEncapsulation: false, passThruUnknownUrl: true }
@@ -57,16 +46,9 @@ import { ArgusDetailModule } from './views/detail';
         BrowserAnimationsModule,
         ArgusDetailModule
     ],
-    providers: [ // expose our Services and Providers into Angular's dependency injection
+    providers: [
         HttpService
     ],
-    exports: [
-    ],
-    entryComponents: [
-    ]
 })
 export class AppModule {
-    constructor(public appRef: ApplicationRef) {
-    }
 }
-

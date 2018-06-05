@@ -1,0 +1,31 @@
+<dx-data-grid *ngIf="ready"
+    style="height: 100%"
+    #dataGrid
+    [dataSource]="gridConfig.rowData"
+    [columns]="gridConfig.columnDef"
+    [columnAutoWidth]="true"
+    [allowColumnResizing]="true"
+    [allowColumnReordering]="true"
+    [columnResizingMode]="nextColumn"
+    [columnMinWidth]="50"
+    (onToolbarPreparing)="onToolbarPreparing($event)"
+    (onRowClick)="rowDoubleClick($event)">
+
+    <dxo-selection *ngIf="!gridConfig.isMultiSelection" mode="single"></dxo-selection>
+
+    <dxo-selection *ngIf="gridConfig.isMultiSelection" mode="multiple"></dxo-selection>
+
+    <dxo-header-filter [visible]="gridConfig.isHeaderFilter" [allowSearch]="true"></dxo-header-filter>
+
+    <dxo-filter-row [visible]="gridConfig.isFilterRow" [applyFilter]="'auto'"></dxo-filter-row>
+
+    <dxo-column-chooser [enabled]="gridConfig.isColumnChooser" [allowSearch]="true"  [mode]="'select'" [height]="400" [width]="400"></dxo-column-chooser>
+
+    <dxo-group-panel [visible]="gridConfig.isGroupPanel"></dxo-group-panel>
+
+    <dxo-grouping [contextMenuEnabled]="gridConfig.contextMenu"></dxo-grouping>
+
+    <dxo-paging [enabled]="gridConfig.isPaging" [pageSize]="10"></dxo-paging>
+
+    <dxo-pager [visible]="gridConfig.isPager" [showInfo]="true"></dxo-pager>
+</dx-data-grid>

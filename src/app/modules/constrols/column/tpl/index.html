@@ -1,8 +1,0 @@
-<div #columnList class="column-list">
-    <mat-form-field class="full-width-input">
-        <input matInput placeholder="Enter name column" [(ngModel)]="inputString" (keyup)="filterColumns()">
-    </mat-form-field>
-    <div *ngFor="let item of columnsList; let i=index">
-        <mat-checkbox [checked]="item.selected" (change)="selectColumn(item, $event, i)">{{ item.template }}</mat-checkbox>
-    </div>
-</div>

@@ -1,9 +1,0 @@
-<div style="overflow: auto">
-    <div *ngFor="let crit of criteries; let i=index" style="display: flex">
-        <argus-criteria
-                        (onRemoveCriteria)="removeCriteria($event)"
-                        [data]="crit"
-                        [advanced]="advanced"></argus-criteria>
-    </div>
-    <button mat-raised-button color="primary" (click)="addCriteria()">Add criteria</button>
-</div>

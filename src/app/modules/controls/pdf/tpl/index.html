@@ -1,0 +1,22 @@
+<a (click)="showPdfFile()" style="cursor: pointer; text-decoration: solid">{{ fileName }}</a>
+<pdf-viewer *ngIf="isShow"
+            id="viewer"
+            [src]="src"
+            [original-size]="false"
+            [autoresize]="true"></pdf-viewer>
+<button mat-fab *ngIf="isShow" style="z-index: 9999;
+    position: fixed;
+    top: 90%;
+    right: 0;
+    bottom: 0;
+    left: 90%;" (click)="isShow=false">
+    <mat-icon>close</mat-icon>
+</button>
+<button mat-fab *ngIf="isShow" style="z-index: 9999;
+    position: fixed;
+    top: 80%;
+    right: 0;
+    bottom: 0;
+    left: 90%;" (click)="isShow=false">
+    <mat-icon>cloud_download</mat-icon>
+</button>
