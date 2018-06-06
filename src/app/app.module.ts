@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { TranslateLoader, TranslateModule, TranslateStaticLoader } from 'ng2-translate';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
@@ -19,6 +19,7 @@ import {
 import { InMemoryDataService } from './mock-service/in-memory-data.service';
 import { HttpService } from './modules/service/http.service/http.service';
 import { ArgusDetailModule } from './views/detail';
+import { ArgusRouterReuseStrategy } from './modules/strategies/argus.router.reuse.strategy';
 
 @NgModule({
     bootstrap: [ArgusBaseComponent],
@@ -47,7 +48,8 @@ import { ArgusDetailModule } from './views/detail';
         ArgusDetailModule
     ],
     providers: [
-        HttpService
+        HttpService,
+        {provide: RouteReuseStrategy, useClass: ArgusRouterReuseStrategy}
     ],
 })
 export class AppModule {
