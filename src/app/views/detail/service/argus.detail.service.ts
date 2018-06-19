@@ -7,6 +7,9 @@ export class ArgusDetailService {
     constructor(private httpService: HttpService) {}
 
     getDataGrid(): Observable<any> {
+        this.httpService.get('https://api.myjson.com/bins/p99eu').subscribe((getHttp) => {
+            console.log(getHttp.json());
+        });
         return this.httpService.getMock('api/grid');
     }
 

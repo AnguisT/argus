@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ArgusDetailService } from '../service/argus.detail.service';
 import { ArgusDetailComponent } from '../argus.detail.component';
 import { ArgusGridProvider } from '../../../modules/controls/grid/provider/argus.grid.provider';
+import { columns } from '../../../constants/constant.columns';
 
 @Injectable()
 export class ArgusDetailProvider {
@@ -12,8 +13,8 @@ export class ArgusDetailProvider {
 
     init(id: number) {
         let self = this;
-        this.argusDetailService.getViewGrid().subscribe((view) => {
-            let column = self.gridProvider.viewColumnsToGridColumns(view);
+        // this.argusDetailService.getViewGrid().subscribe((view) => {
+            let column = self.gridProvider.viewColumnsToGridColumns(columns);
             self.compContext.gridConfig.columnDef = column;
             self.argusDetailService.getDataGrid().subscribe((dataGrid) => {
                 self.compContext.gridConfig.rowData = dataGrid;
@@ -31,6 +32,6 @@ export class ArgusDetailProvider {
                     self.compContext.dataLoaded.emit();
                 });
             });
-        });
+        // });
     }
 }
